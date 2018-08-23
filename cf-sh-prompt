@@ -1,16 +1,16 @@
 #!/usr/bin/env bash 
 __cf_api_endpoint() {
-	cf target | awk '/^API endpoint:/ {print $3;}'
+	cf target | awk '/^api endpoint:/ {print $3;}'
 }
 
 __cf_user() {
-	cf target | awk '/^User:/ {print $2;}'
+	cf target | awk '/^user:/ {print $2;}'
 }
 
 __cf_org() {
-	cf target | awk '/^Org:/ {print $2;}'
+	cf target | awk '/^org:/ {print $2;}'
 }
 
 __cf_space() {
-	cf target | awk '/^Space:/ {print $2;}'
+	cf target | awk '/^space:/ {print $2;}'
 }
