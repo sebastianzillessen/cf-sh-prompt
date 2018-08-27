@@ -1,16 +1,46 @@
 #!/usr/bin/env bash 
-__cf_api_endpoint() {
-	cf target | awk '/^api endpoint:/ {print $3;}'
-}
-
-__cf_user() {
-	cf target | awk '/^user:/ {print $2;}'
-}
-
 __cf_org() {
-	cf target | awk '/^org:/ {print $2;}'
+	jq '.OrganizationFields.Name' ~/.cf/config.json -r
 }
 
 __cf_space() {
-	cf target | awk '/^space:/ {print $2;}'
+	jq '.SpaceFields.Name' ~/.cf/config.json -r
 }
+
+__red_back(){
+	tput setab 1
+}
+
+__grey_front(){
+	tput setaf 8
+}
+
+__font_reset(){
+	tput sgr0
+}
+
+__cf_ps1() {
+	if [ ! -z "$(__cf_space)" -a "$(__cf_space)" != " " ]
+	then
+		if [[ "$(__cf_space)" ~= "Prod" ]]
+		then
+			echo "$(__red_back)$(__grey_front)[$(__cf_org)/$(__cf_space)] $(__font_reset)"
+		else
+			echo "[$(__cf_org)/$(__cf_space)] "
+		fi
+	else
+		echo ""
+	fi
+}
+
+__cf_install(){
+	if [[ $PS1 =~ .*__cf_ps1.* ]]
+	then
+		echo "CF Helper already installed"
+	else
+  		export PS1="\[\033[32m\][\u:\w]\[\033[1;33m\] \$(__git_ps1) \n\[\033[1;36m\]\[\033[32m\]\$(__cf_ps1)$ \[\033[0m\]"
+  		echo "$(__red_back)CF Helper now installed$(__font_reset)."
+  	fi
+}
+
+__cf_install
