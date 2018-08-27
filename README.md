@@ -5,44 +5,36 @@ cf-sh-prompt
 Show in the shell prompt where the Cloud Foundry CLI is currently pointing.
 
 ```
-graham:~ [https://api.run.pivotal.io]$
+[vagrant:~/workspace/cf-sh-prompt]  (master) 
+[MyOrganisation/Production] $
 ```
 
 Currently tested on bash, with an aspiration to work in zsh.
 
+In difference to the original idea of [bleach](https://github.com/bleach/cf-sh-prompt), this approach uses the `~/.cf/config.json` file of CloudFoundry, which makes this approach much more faster and reliable.
+
+In addition, if a Space contains "Prod" it will color code the output with red background.
+
+![Example](./terminal-cf-sh-prompt.png/?raw=true "Color coded output.")
+ 
+
 Installing and using
 ====================
-
-Copy the file `cf-sh-prompt` from this repository to somewhere on your machine.
-
-Run the following commands at your shell prompt in order to try the prompt out
-
 ```
-. /path/to/cf-sh-prompt
-PS1="\u:\W \[\$(__cf_org)/\$(__cf_space)\]\$ "
+wget -O ~/.cf-sh-prompt https://github.com/sebastianzillessen/cf-sh-prompt/raw/master/cf-sh-prompt
+echo ". ~/.cf-sh-prompt" >> ~/.bash_profile
 ```
 
-You would expect the output to contain your username, working directory CF org
-& space. Like this:
-
-`graham:cf-sh-prompt [paas-demo/sandbox]$ `
-
-If you change the org or space that the CF command line points to, the prompt
-will change too:
+As soon as you open now a new Tab in your shell you will find the following output:
 
 ```
-cf target -o backend -s production
-...
-graham:cf-sh-prompt [backend/production]$
+CF Helper now installed.
+[vagrant:~/workspace/het-composite/het]  (develop) 
+[MyOrganisation/Space] $ 
 ```
+As soon as the Space contains `Prod` it will color code the output with a red flag. 
 
-To ensure that every shell opened from now onwards uses that prompt, add those
-lines to your shell initialisation file, for example `.bashrc`.
+Know Issues
+====================
 
-The shell functions available are:
-
-- `__cf_api_endpoint`: the URL of the CF API
-- `__cf_org`: the CF org currently targeted
-- `__cf_space`: the CF space currently targeted
-- `__cf_user`: the CF user currently logged in
-
+- As the `PS1` command includes `__git_ps1` the [git-prompt](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh) needs to be installed on the running machine. 
