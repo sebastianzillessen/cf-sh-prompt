@@ -22,7 +22,7 @@ Installing and using
 ====================
 ```
 wget -O ~/.cf-sh-prompt https://github.com/sebastianzillessen/cf-sh-prompt/raw/master/cf-sh-prompt
-echo ". ~/.cf-sh-prompt" >> ~/.bash_profile
+echo ". ~/.cf-sh-prompt" >> ~/.bashrc
 ```
 
 As soon as you open now a new Tab in your shell you will find the following output:
