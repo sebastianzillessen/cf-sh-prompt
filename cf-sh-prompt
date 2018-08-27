@@ -22,7 +22,7 @@ __font_reset(){
 __cf_ps1() {
 	if [ ! -z "$(__cf_space)" -a "$(__cf_space)" != " " ]
 	then
-		if [[ "$(__cf_space)" ~= "Prod" ]]
+		if [[ "$(__cf_space)" =~ "Prod" ]]
 		then
 			echo "$(__red_back)$(__grey_front)[$(__cf_org)/$(__cf_space)] $(__font_reset)"
 		else
@@ -38,8 +38,9 @@ __cf_install(){
 	then
 		echo "CF Helper already installed"
 	else
+		# using default output on my machine, installed git ps1 helper. the \[...\] stuff are color commands.
   		export PS1="\[\033[32m\][\u:\w]\[\033[1;33m\] \$(__git_ps1) \n\[\033[1;36m\]\[\033[32m\]\$(__cf_ps1)$ \[\033[0m\]"
-  		echo "$(__red_back)CF Helper now installed$(__font_reset)."
+  		echo "$(__red_back)$(__grey_front)CF Helper now installed$(__font_reset)."
   	fi
 }
 
