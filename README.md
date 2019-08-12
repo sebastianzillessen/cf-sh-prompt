@@ -20,9 +20,11 @@ In addition, if a Space contains "Prod" it will color code the output with red b
 
 Installing and using
 ====================
+
 **Prerequisites**:
 - `git` installed (or you need to adapt the `PW1` export)
-- `jq` installed (e.g. use `sudo dnf install jq` or `sudo apt-get install jq`) 
+- `jq` installed (e.g. use `sudo dnf install jq` or `sudo apt-get install jq`)
+- Use the `cf` CLI at least once, so that the `.cf/config.json` file is created.
 
 **Installation**:
 
